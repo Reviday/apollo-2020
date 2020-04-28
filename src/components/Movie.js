@@ -16,12 +16,14 @@ const Poster = styled.div`
   width: 100%;
   background-size: cover;
   background-position: center center;
+  border-radius: 7px;
 `;
 
-export default ({ id, bg }) => (
+export default ({ id, bg, isLiked }) => (
   <Container>
     <Link to={`/${id}`}>
       <Poster bg={bg} />
     </Link>
+    <button>{isLiked ? "Unlike" : "Like"}</button>
   </Container>
 );
