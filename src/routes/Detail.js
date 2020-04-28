@@ -13,6 +13,10 @@ const GET_MOVIE = gql`
       medium_cover_image
       description_intro
     }
+    suggestions(id: $id) {
+      id
+      medium_cover_image
+    }
   }
 `;
 
@@ -49,15 +53,13 @@ const Poster = styled.div`
   width: 25%;
   height: 60%;
   background-color: transparent;
-  background-image: url(${props => props.bg});
+  background-image: url(${(props) => props.bg});
   background-size: cover;
   background-position: center center;
 `;
 
 export default () => {
   const { id } = useParams();
-  console.log(id);
-  console.log(typeof id);
   const { loading, data } = useQuery(GET_MOVIE, {
     variables: { id: Number(id) }, // 값 자체가 String으로 들어와서 Number 타입으로 변환.(API역할을 하는 서버에서 String으로 넘기도록 했나보다)
   });
@@ -65,16 +67,12 @@ export default () => {
     <Container>
       <Column>
         <Title>{loading ? "Loading..." : data.movie.title}</Title>
-        {!loading && data.movie && (
-          <>
-            <Subtitle>
-              {data.movie.language} · {data.movie.rating}
-            </Subtitle>
-            <Description>{data.movie.description_intro}</Description>
-          </>
-        )}
+        <Subtitle>
+          {data?.movie?.language} · {data?.movie?.rating}
+        </Subtitle>
+        <Description>{data?.movie?.description_intro}</Description>
       </Column>
-      <Poster bg={data && data.movie ? data.movie.medium_cover_image : ""}></Poster>
+      <Poster bg={data?.movie?.mßdium_cover_image}></Poster>
     </Container>
   );
 };
