@@ -72,7 +72,7 @@ export default () => {
         </Subtitle>
         <Description>{data?.movie?.description_intro}</Description>
       </Column>
-      <Poster bg={data?.movie?.mßdium_cover_image}></Poster>
+      <Poster bg={data?.movie?.medium_cover_image}></Poster>
     </Container>
   );
 };
