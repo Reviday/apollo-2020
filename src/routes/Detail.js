@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
 
+// ### 잊지마. document 요청은 ID와 함께 해야 Apollo는 같은 것임을 이해할 수 있다.
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
