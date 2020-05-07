@@ -5,9 +5,20 @@ const client = new ApolloClient({
   uri: "http://localhost:4000", // movieql 레포지토리를 직접 로컬에서 실행. 이 프로젝트를 실행하기 위해서는 movieql도 실행시켜줘야 함.
   resolvers: {
     Movie: {
-      isLiked: () => false
-    }
-  }
+      isLiked: () => false,
+    },
+    Mutation: {
+      likeMovie: (_, { id }, { cache }) => {
+        cache.writeData({
+          id: `Movie:${id}`,
+          data: {
+            isLiked: true,
+            medium_cover_image: "lalalalalala"
+          },
+        });
+      },
+    },
+  },
 });
 
 export default client;
